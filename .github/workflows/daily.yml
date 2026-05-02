@@ -1,5 +1,8 @@
 name: Cocoa Bot Daily Email
 
+permissions:
+  contents: write
+  
 on:
   schedule:
     - cron: "30 1 * * 1-6"   # Mon–Sat 01:30 UTC = 09:30 Singapore
