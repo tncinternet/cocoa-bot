@@ -13,7 +13,7 @@ def get_cocoa_price():
         # data = nasdaqdatalink.get("ICE/CC1")
 
         # Get latest close price
-        latest = 3200
+        #latest = 3200
         # data["Settle"].iloc[-1]
 
         #return float(latest)
