@@ -1,4 +1,4 @@
-from scraper import get_cocoa_price
+from nasdaq_source import get_cocoa_price
 from fx import get_usdidr
 from pricing import selling_price, price_change
 from storage import load_data, save_data
