@@ -1,0 +1,47 @@
+name: Cocoa Bot Daily Email
+
+on:
+  schedule:
+    - cron: "30 1 * * 1-6"   # Mon–Sat 01:30 UTC = 09:30 Singapore
+  workflow_dispatch:
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Checkout repo
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          persist-credentials: true
+
+      # 2. Setup Python
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.10"
+
+      # 3. Install dependencies
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      # 4. Run your bot
+      - name: Run Cocoa Bot
+        env:
+          EMAIL_USER: ${{ secrets.EMAIL_USER }}
+          EMAIL_PASS: ${{ secrets.EMAIL_PASS }}
+          EMAIL_TO: ${{ secrets.EMAIL_TO }}
+        run: python main.py
+
+      # 5. Persist storage.json (VERY IMPORTANT)
+      - name: Commit storage file
+        run: |
+          git config --global user.name "cocoa-bot"
+          git config --global user.email "bot@users.noreply.github.com"
+         
+          git add storage.json
+         
+          git diff --cached --quiet || git commit -m "update storage"
+         
+          git push
