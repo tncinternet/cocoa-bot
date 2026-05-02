@@ -9,12 +9,13 @@ nasdaqdatalink.ApiConfig.api_key = API_KEY
 def get_cocoa_price():
     try:
         # ICE Cocoa Futures (front month)
-        data = nasdaqdatalink.get("ICE/CC1")
+        # data = nasdaqdatalink.get("ICE/CC1")
 
         # Get latest close price
-        latest = data["Settle"].iloc[-1]
+        latest = 3200
+        # data["Settle"].iloc[-1]
 
-        return float(3200)
+        return float(latest)
 
     except Exception as e:
         raise RuntimeError(f"Nasdaq cocoa fetch failed: {str(e)}")
